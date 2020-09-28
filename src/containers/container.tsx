@@ -42,12 +42,12 @@ export default function Container() {
       if (correct) {
         setScore((prevScore) => prevScore + 1);
         e.currentTarget.className = 'Questions_answersButtonGreen__2Pz_m';
-      } else {
+      } else if (!correct) {
         e.currentTarget.className = 'Questions_answersButtonRed__DOeLn';
-        let el = Array.from(document.getElementsByName('answers')).find(
+        let el: any = Array.from(document.getElementsByName('answers')).find(
           (i) => questions[number].correct_answer === i.innerText
         );
-        el?.classList.add('Questions_answersButtonGreen__2Pz_m');
+        el.className = 'Questions_answersButtonGreen__2Pz_m';
       }
       const answerObject = {
         question: questions[number].question,
