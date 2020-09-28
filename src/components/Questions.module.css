@@ -1,0 +1,106 @@
+.mainDiv {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.questionNumber {
+  color: #b3e5fc;
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+}
+
+.question {
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+
+  padding: 5px;
+  font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+}
+
+.answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.answersButton {
+  width: 330px;
+  margin: 5px;
+  font-size: 20px;
+  padding: 5px;
+  font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+  color: white;
+  background-color: #3949ab;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.answersButtonRed {
+  width: 330px;
+  margin: 5px;
+  font-size: 20px;
+  padding: 5px;
+  font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+  color: white;
+  background-color: #d50000;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.answersButtonGreen {
+  width: 330px;
+  margin: 5px;
+  font-size: 20px;
+  padding: 5px;
+  font-family: 'Montserrat', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+  color: white;
+  background-color: #33691e;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.answersButton:hover {
+  background-color: #1a237e;
+}
+
+@media (max-width: 599px) {
+  .question {
+    font-size: 22px;
+  }
+
+  .answersButton {
+    font-size: 17px;
+    width: 270px;
+  }
+
+  .answersButtonGreen {
+    font-size: 17px;
+    width: 270px;
+  }
+
+  .answersButtonRed {
+    font-size: 17px;
+    width: 270px;
+  }
+}
