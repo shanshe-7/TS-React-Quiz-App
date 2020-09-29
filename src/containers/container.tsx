@@ -21,7 +21,7 @@ export default function Container() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
   const [questionCategory, setQuestionCategory] = useState(9);
-  const [questionDifficulty, setQuestionDifficulty] = useState('hard');
+  const [questionDifficulty, setQuestionDifficulty] = useState('easy');
 
   const startTrivia = async () => {
     setLoading(true);
@@ -49,10 +49,15 @@ export default function Container() {
         e.currentTarget.className = 'Questions_answersButtonGreen__2Pz_m';
       } else if (!correct) {
         e.currentTarget.className = 'Questions_answersButtonRed__DOeLn';
-        let el: any = Array.from(document.getElementsByName('answers')).find(
-          (i) => questions[number].correct_answer === i.innerText
-        );
-        el.className = 'Questions_answersButtonGreen__2Pz_m';
+        let elements = Array.from(document.getElementsByName('answers'));
+        let newEl: any = elements.find((i: any) => {
+          const corAnswer = questions[number].correct_answer;
+
+          const buttonAnswer = i.value;
+
+          return corAnswer === buttonAnswer;
+        });
+        newEl.className = 'Questions_answersButtonGreen__2Pz_m';
       }
       const answerObject = {
         question: questions[number].question,
@@ -61,6 +66,10 @@ export default function Container() {
         correctAnswer: questions[number].correct_answer,
       };
       setUserAnswers((prevSt) => [...prevSt, answerObject]);
+    }
+    if (userAnswers.length === TOTAL_QUESTIONS - 1) {
+      setQuestionCategory(9);
+      setQuestionDifficulty('easy');
     }
   };
   const nextQuestion = () => {
@@ -94,6 +103,7 @@ export default function Container() {
     setScore(0);
     setGameOver(true);
     setQuestionCategory(9);
+    setQuestionDifficulty('easy');
   };
 
   return (
