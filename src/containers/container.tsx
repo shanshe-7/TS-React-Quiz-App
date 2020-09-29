@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import Questions from '../components/Questions';
 import { fetchQuestions, QuestionState } from '../Api';
-import { categories } from '../Utils';
+import { categories, difficulty } from '../Utils';
 import classes from './container.module.css';
 
 export type AnswerObject = {
@@ -20,13 +20,18 @@ export default function Container() {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
-  const [questinCategory, setQuestionCategory] = useState(9);
+  const [questionCategory, setQuestionCategory] = useState(9);
+  const [questionDifficulty, setQuestionDifficulty] = useState('hard');
 
   const startTrivia = async () => {
     setLoading(true);
     setGameOver(false);
 
-    const newQuestions = await fetchQuestions(TOTAL_QUESTIONS, questinCategory);
+    const newQuestions = await fetchQuestions(
+      TOTAL_QUESTIONS,
+      questionCategory,
+      questionDifficulty
+    );
     if (newQuestions) {
       setQuestions(newQuestions);
     }
@@ -74,6 +79,13 @@ export default function Container() {
     setQuestionCategory(Number(option));
   };
 
+  const handleQuestionDifficulty = (e: ChangeEvent<HTMLSelectElement>) => {
+    let index: number = e.currentTarget.selectedIndex;
+    let el = e.currentTarget.children[index];
+    let option = el.getAttribute('id');
+    setQuestionDifficulty(option as string);
+  };
+
   const handleQuit = () => {
     setLoading(false);
     setQuestions([]);
@@ -86,7 +98,7 @@ export default function Container() {
 
   return (
     <div className={classes.background}>
-      s<h1 className={classes.trivia}>QUIZ</h1>
+      <h1 className={classes.trivia}>QUIZ</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <div className={classes.category}>
           <select
@@ -102,6 +114,26 @@ export default function Container() {
           </select>
         </div>
       ) : null}
+
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <div className={classes.difficulty}>
+          <label className={classes.label} htmlFor='difficulty'>
+            Difficulty:{' '}
+          </label>
+          <select
+            className={classes.difficultySelect}
+            onChange={handleQuestionDifficulty}
+            id='difficulty'
+          >
+            {difficulty.map((d) => (
+              <option key={d} id={d} value={d}>
+                {d}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
+
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
         <div className={classes.start}>
           <button className={classes.startButton} onClick={startTrivia}>

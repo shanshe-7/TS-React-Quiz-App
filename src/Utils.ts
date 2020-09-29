@@ -28,3 +28,5 @@ export const categories: Array<{ id: number; name: string }> = [
   { id: 31, name: 'Entertainment: Japanese Anime & Manga' },
   { id: 32, name: 'Entertainment: Cartoon & Animations' },
 ];
+
+export const difficulty: string[] = ['easy', 'medium', 'hard'];
